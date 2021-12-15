@@ -1,0 +1,9 @@
+title Exercise 0.6
+
+note over browser:
+browser runs form's onSubmit function that adds new note to notes
+and redraw notes and send new note to the server
+end note
+
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+server-->browser: {message: "note created"}
