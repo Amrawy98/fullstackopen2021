@@ -4,12 +4,16 @@ const Header = (props) => {
   return <h1>{props.course}</h1>;
 };
 
-const Content = (props) => {
-  const parts = props.parts.map((part) => (
+const Part = ({ part }) => {
+  return (
     <p>
       {part.name} {part.count}
     </p>
-  ));
+  );
+};
+
+const Content = (props) => {
+  const parts = props.parts.map((part) => <Part part={part} />);
   return <div>{parts}</div>;
 };
 
