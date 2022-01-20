@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import numberServices from "./services/numbers";
-import Persons from "./components/persons";
+import PersonList from "./components/personList";
 import PersonForm from "./components/personFrom";
 
 const Filter = ({ searchPhrase, handleChangeSearchPhrase }) => (
@@ -82,7 +82,7 @@ const App = () => {
         handleChangeNumber={handleChangeNumber}
       />
       <h2>Numbers</h2>
-      <Persons
+      <PersonList
         persons={persons}
         setPersons={setPersons}
         remove={numberServices.remove}
