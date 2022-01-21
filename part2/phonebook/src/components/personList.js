@@ -5,19 +5,7 @@ const Person = ({ person, deletePersonHandler }) => (
   </div>
 );
 
-const PersonList = ({ persons, setPersons, remove, searchPhrase }) => {
-  const deleteNumber = (person) => {
-    if (window.confirm(`Delete ${person.name}?`))
-      remove(person.id)
-        .then((data) => setPersons(persons.filter((p) => p.id !== person.id)))
-        .catch((error) => {
-          alert(
-            `the number for '${person.name}' was already deleted from server`
-          );
-          setPersons(persons.filter((p) => p.id !== person.id));
-        });
-  };
-
+const PersonList = ({ persons, searchPhrase, deleteHandler }) => {
   const getSearchResult = () =>
     persons.filter((person) => {
       const name1 = person.name.toLowerCase();
@@ -35,7 +23,7 @@ const PersonList = ({ persons, setPersons, remove, searchPhrase }) => {
             <Person
               key={person.id}
               person={person}
-              deletePersonHandler={() => deleteNumber(person)}
+              deletePersonHandler={() => deleteHandler(person)}
             />
           ))}
     </div>
