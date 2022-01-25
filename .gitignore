@@ -1,2 +1,6 @@
 
 part2/countries/.env
+
+part3/phonebookBackend/node_modules/
+
+part2/phonebook/db.json
