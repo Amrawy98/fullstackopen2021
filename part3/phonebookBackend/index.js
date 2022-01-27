@@ -1,4 +1,5 @@
 const express = require("express");
+const morgan = require("morgan");
 
 let persons = [
   {
@@ -45,6 +46,15 @@ const validatePerson2 = (person) =>
 
 const app = express();
 app.use(express.json());
+
+morgan.token("body", function (req, res) {
+  const ret = JSON.stringify(req.body);
+  return ret === "{}" ? " " : ret;
+});
+
+app.use(
+  morgan(":method :url :status :res[content-length] - :response-time ms :body")
+);
 
 app.get("/", (req, res) => {
   return res.send("<h1>YEAH BOI</h1>");
