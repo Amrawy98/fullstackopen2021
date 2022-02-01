@@ -48,7 +48,7 @@ const validatePerson2 = (person) =>
 const app = express();
 
 app.use(cors());
-
+app.use(express.static("build"));
 app.use(express.json());
 
 morgan.token("body", function (req, res) {
