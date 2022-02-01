@@ -7,7 +7,7 @@
     "dev": "nodemon index.js",
     "build:ui": "rm -rf build && cd ../../part2/phonebook && yarn  build && cp -r build ../../part3/phonebookBackend/",
     "deploy": "cd ../../ && git subtree push --prefix part3/phonebookBackend heroku main",
-    "deploy:full": "yarn  build:ui && git add . && git commit -m uibuild && git push && yarn  deploy",
+    "deploy:full": "yarn  build:ui && git add . && git commit -m uibuild",
     "logs:prod": "heroku logs --tail",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
