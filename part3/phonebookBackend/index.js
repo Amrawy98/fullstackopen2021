@@ -1,5 +1,6 @@
 const express = require("express");
 const morgan = require("morgan");
+const cors = require("cors");
 
 let persons = [
   {
@@ -45,6 +46,9 @@ const validatePerson2 = (person) =>
     : "name missing";
 
 const app = express();
+
+app.use(cors());
+
 app.use(express.json());
 
 morgan.token("body", function (req, res) {
@@ -103,7 +107,7 @@ app.delete("/api/persons/:id", (req, res) => {
   }
 });
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT} ಠ_ಠ`);
 });
