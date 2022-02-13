@@ -38,6 +38,14 @@ const App = () => {
     setNewNumber(value);
   };
 
+  const showMessage = (message, errorSuccess) => {
+    setErrorOrSuccess(errorSuccess);
+    setMessage(message);
+    setTimeout(() => {
+      setMessage(null);
+    }, 5000);
+  };
+
   const deleteNumber = (person) => {
     if (window.confirm(`Delete ${person.name}?`))
       numberServices
@@ -50,14 +58,6 @@ const App = () => {
           );
           setPersons(persons.filter((p) => p.id !== person.id));
         });
-  };
-
-  const showMessage = (message, errorSuccess) => {
-    setErrorOrSuccess(errorSuccess);
-    setMessage(message);
-    setTimeout(() => {
-      setMessage(null);
-    }, 5000);
   };
 
   const addNumber = (event) => {
@@ -77,16 +77,20 @@ const App = () => {
               persons.map((note) => (note.id === data.id ? data : note))
             );
             showMessage(`Modified ${data.name}`, true);
-          });
+          })
+          .catch((error) => showMessage(error.response.data.error, false));
     } else {
       const newElement = {
         name: newName,
         number: newNumber,
       };
-      numberServices.create(newElement).then((data) => {
-        setPersons(persons.concat(data));
-        showMessage(`Added ${data.name}`, true);
-      });
+      numberServices
+        .create(newElement)
+        .then((data) => {
+          setPersons(persons.concat(data));
+          showMessage(`Added ${data.name}`, true);
+        })
+        .catch((error) => showMessage(error.response.data.error, false));
     }
     setNewName("");
     setNewNumber("");
