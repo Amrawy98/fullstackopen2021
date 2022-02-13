@@ -5,6 +5,7 @@ const personSchema = new mongoose.Schema({
   name: {
     type: String,
     minlength: [3, "Name's minimum length is 3."],
+    unique: true,
   },
   number: {
     type: String,
@@ -15,7 +16,6 @@ const personSchema = new mongoose.Schema({
       },
       message: (props) => `${props.value} is not a valid phone number!`,
     },
-    unique: true,
   },
 });
 
