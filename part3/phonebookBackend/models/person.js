@@ -2,8 +2,21 @@ const mongoose = require("mongoose");
 
 const dbName = "phonebook";
 const personSchema = new mongoose.Schema({
-  name: String,
-  number: String,
+  name: {
+    type: String,
+    minlength: [3, "Name's minimum length is 3."],
+  },
+  number: {
+    type: String,
+    minlength: [8, "minimum length for the phone number is 8"],
+    validate: {
+      validator: function (v) {
+        return /(^\d{8}$|^\d{2}-\d{6,}$|^\d{3}-\d{5,}$)/.test(v);
+      },
+      message: (props) => `${props.value} is not a valid phone number!`,
+    },
+    unique: true,
+  },
 });
 
 const url = process.env.MONGODB_URI;
