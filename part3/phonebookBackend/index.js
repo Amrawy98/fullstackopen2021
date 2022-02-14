@@ -3,7 +3,6 @@ const morgan = require("morgan");
 const cors = require("cors");
 require("dotenv").config();
 const Person = require("./models/person");
-const { response } = require("express");
 
 /*let persons = [
   {
@@ -66,7 +65,7 @@ const errorHandler = (error, request, response, next) => {
   next(error);
 };
 
-morgan.token("body", function (req, res) {
+morgan.token("body", function (req) {
   const ret = JSON.stringify(req.body);
   return ret === "{}" ? " " : ret;
 });
@@ -119,7 +118,7 @@ app.get("/api/persons/:id", (req, res, next) => {
 
 app.delete("/api/persons/:id", (req, res, next) => {
   Person.findByIdAndRemove(req.params.id)
-    .then((result) => res.status(204).end())
+    .then(() => res.status(204).end())
     .catch((error) => next(error));
 });
 
@@ -146,6 +145,7 @@ const unknownEndpoint = (request, response) => {
 app.use(unknownEndpoint);
 app.use(errorHandler);
 
+// eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT} ಠ_ಠ`);
